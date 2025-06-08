@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,23 +34,33 @@ fun DogListScreen(viewModel: DogListViewModel = hiltViewModel()) {
 
     if (loading) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
         }
     } else if (error != null) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center
         ) {
-            Text(error ?: "")
+            Text(error ?: "", color = MaterialTheme.colorScheme.onBackground)
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        )
         }
     } else {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
+                .background(MaterialTheme.colorScheme.background)
         ) {
             items(
                 items = dogs,
@@ -76,9 +87,19 @@ fun DogItem(dog: Dog) {
             )
             Spacer(Modifier.width(16.dp))
             Column {
-                Text(dog.name, fontWeight = FontWeight.Bold)
-                Text("Breed: ${dog.breed}")
-                Text("Age: ${dog.age}")
+                Text(
+                    dog.name,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Text(
+                    "Breed: ${dog.breed}",
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    "Age: ${dog.age}",
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
         }
     }
