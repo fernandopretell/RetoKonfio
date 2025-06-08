@@ -13,16 +13,14 @@ class DogRepositoryImpl @Inject constructor(
     private val dao: DogDao
 ) : DogRepository {
 
-    private var isFirstLaunch = true
-
     override suspend fun getDogs(): List<Dog> {
-        return if (isFirstLaunch) {
+        val localDogs = dao.getDogs()
+        return if (localDogs.isEmpty()) {
             val remote = api.getDogs()
             dao.insertDogs(remote.map { it.toEntity() })
-            isFirstLaunch = false
             remote
         } else {
-            dao.getDogs().map { it.toDomain() }
+            localDogs.map { it.toDomain() }
         }
     }
 }
