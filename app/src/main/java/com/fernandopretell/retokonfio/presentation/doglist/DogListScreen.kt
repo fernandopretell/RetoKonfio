@@ -51,6 +51,9 @@ fun DogListScreen(viewModel: DogListViewModel = hiltViewModel()) {
             contentAlignment = Alignment.Center
         ) {
             Text(error ?: "", color = MaterialTheme.colorScheme.onBackground)
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        )
         }
     } else {
         LazyColumn(
