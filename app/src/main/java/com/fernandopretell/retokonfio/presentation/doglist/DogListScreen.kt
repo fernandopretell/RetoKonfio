@@ -1,5 +1,6 @@
 package com.fernandopretell.retokonfio.presentation.doglist
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,9 +52,6 @@ fun DogListScreen(viewModel: DogListViewModel = hiltViewModel()) {
             contentAlignment = Alignment.Center
         ) {
             Text(error ?: "", color = MaterialTheme.colorScheme.onBackground)
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        )
         }
     } else {
         LazyColumn(
