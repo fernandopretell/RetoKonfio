@@ -29,6 +29,7 @@ import com.fernandopretell.retokonfio.domain.model.Dog
 fun DogListScreen(viewModel: DogListViewModel = hiltViewModel()) {
     val dogs by viewModel.dogs
     val loading by viewModel.isLoading
+    val error by viewModel.errorMessage
 
     if (loading) {
         Box(
@@ -36,6 +37,13 @@ fun DogListScreen(viewModel: DogListViewModel = hiltViewModel()) {
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
+        }
+    } else if (error != null) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(error ?: "")
         }
     } else {
         LazyColumn(

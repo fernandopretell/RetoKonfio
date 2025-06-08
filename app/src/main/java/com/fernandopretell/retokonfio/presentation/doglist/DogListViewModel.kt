@@ -21,10 +21,18 @@ class DogListViewModel @Inject constructor(
     private val _isLoading = mutableStateOf(true)
     val isLoading: State<Boolean> get() = _isLoading
 
+    private val _errorMessage = mutableStateOf<String?>(null)
+    val errorMessage: State<String?> get() = _errorMessage
+
     init {
         viewModelScope.launch {
-            _dogs.value = repository.getDogs()
-            _isLoading.value = false
+            try {
+                _dogs.value = repository.getDogs()
+            } catch (e: Exception) {
+                _errorMessage.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 }
