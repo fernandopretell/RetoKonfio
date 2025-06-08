@@ -5,14 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fernandopretell.retokonfio.domain.model.Dog
-import com.fernandopretell.retokonfio.domain.repository.DogRepository
+import com.fernandopretell.retokonfio.domain.usecase.GetDogsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DogListViewModel @Inject constructor(
-    private val repository: DogRepository
+    private val getDogs: GetDogsUseCase
 ) : ViewModel() {
 
     private val _dogs = mutableStateOf<List<Dog>>(emptyList())
@@ -27,7 +27,7 @@ class DogListViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             try {
-                _dogs.value = repository.getDogs()
+                _dogs.value = getDogs()
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             } finally {

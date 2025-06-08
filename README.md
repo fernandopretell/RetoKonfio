@@ -1,6 +1,6 @@
 # Reto Konfio
 
-This project is an Android application created for the Konfio technical challenge. It displays a list of dogs fetched from a public JSON endpoint and stores them locally for subsequent launches.
+This project is an Android application created for the Konfio technical challenge. It implements a simple **clean architecture** structure with `data`, `domain` and `presentation` layers. The app displays a list of dogs fetched from a public JSON endpoint and stores them locally for subsequent launches.
 
 ## Features
 
@@ -8,6 +8,7 @@ This project is an Android application created for the Konfio technical challeng
 - **Retrofit** for network requests.
 - **Room** database used to cache the retrieved dogs.
 - **Hilt** dependency injection.
+- **Clean architecture** separation with use cases in the domain layer.
 
 ## Building and Running
 
